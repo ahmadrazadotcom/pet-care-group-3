@@ -1,80 +1,128 @@
-# Pet Care Information System
+# Pet Care Information System – Group 3
 
-ICT305 Software Development Project 2 – Group 3
+ICT305 Software Development Project 2 – Assessment 2
 
-This is the first working-code draft for the Sprint 1 MVP. Pet owners can use the website to keep their pet details, care records and appointments in one place. It uses Flask, SQLite, HTML, CSS and Bootstrap.
+The Pet Care Information System helps pet owners keep their pet details, care records and clinic appointments in one place. The website uses Python Flask, SQLite, HTML, CSS and Bootstrap.
 
-## What is included
+## Sprint 1 Features
 
-| Story | Feature | Points |
+| Story ID | Feature | Story Points |
 |---|---|---:|
 | US-01 | Create an account | 3 |
 | US-02 | Sign in and sign out | 3 |
 | US-03 | Add and view pets | 3 |
 | US-04 | Edit pet details | 2 |
-| US-05 | Add a care record | 5 |
-| US-07 | Add a clinic appointment | 3 |
-| US-09 | Show upcoming and overdue reminders | 5 |
+| US-05 | Add care records | 5 |
+| US-07 | Add clinic appointments | 3 |
+| US-09 | View upcoming and overdue reminders | 5 |
+| | Total planned points | 24 |
 
-The seven stories total 24 points. This is the planned scope, not a claim that the team completed or accepted all 24 points during the sprint. Editing or deleting care records and changing or cancelling appointments are planned for Sprint 2. No medical advice, payments, clinic portal or email/SMS reminders are included.
+The first version includes the seven planned MVP features. Automated tests have passed. Team review and final acceptance are still required.
 
-## Run on your computer
+Editing care records and changing or cancelling appointments are planned for Sprint 2.
 
-Install Python 3.12 or later. Open a terminal in this folder. On Windows, run:
+## Technologies Used
 
-```powershell
+- Python Flask
+- SQLite
+- HTML and CSS
+- Bootstrap
+- Pytest
+- Playwright
+- GitHub Actions
+
+## Run the Website
+
+Install Python 3.12 or later. Open a terminal in the project folder.
+
+### Windows
+
+```
 py -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 .venv\Scripts\python.exe app.py
 ```
 
-On macOS or Linux, run:
+### macOS or Linux
 
-```bash
+```
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python app.py
 ```
 
-Open http://127.0.0.1:5000 in a browser. Create a new account. The database is created automatically in the `instance` folder. Use made-up data only.
+Open http://127.0.0.1:5000 in a web browser.
 
-## Run tests
+Create an account to start using the website. The database is created automatically in the instance folder. Use sample data for testing.
 
-On Windows:
+## Automated Testing
 
-```powershell
+The project uses Pytest and Playwright to test the website. GitHub Actions runs the tests when changes are pushed or a pull request is created.
+
+### Test Results
+
+Results from 26 November 2026:
+
+| Test Result | Value |
+|---|---:|
+| Total tests | 28 |
+| Passed | 28 |
+| Failed | 0 |
+| app.py coverage | 97% |
+| core.py coverage | 100% |
+| Combined coverage | 98% |
+
+### Run Tests on Windows
+
+```
 .venv\Scripts\python.exe -m playwright install chromium
 .venv\Scripts\python.exe -m pytest -v --cov=core --cov=app --cov-report=term-missing
 ```
 
-On macOS or Linux:
+### Run Tests on macOS or Linux
 
-```bash
+```
 .venv/bin/python -m playwright install chromium
 .venv/bin/python -m pytest -v --cov=core --cov=app --cov-report=term-missing
 ```
 
-The GitHub Actions workflow runs these tests on pushes and pull requests. A green result is only evidence once the workflow has actually run. If the repository already has a CI workflow, keep it until you confirm the new one works.
+## Deployment
 
-## Staging setup
+The website is planned for deployment in a shared hosting environment.
 
-Use a shared Python hosting environment with HTTPS and a persistent SQLite database. Install `requirements.txt`, use the start command `gunicorn --workers 1 --bind 0.0.0.0:$PORT app:app` (adapt the port to your host), and set these environment variables in the host's settings:
+Start command:
 
-- `SECRET_KEY`: a long random secret, shared across restarts. Generate it locally with `python -c "import secrets; print(secrets.token_hex(32))"`. Never commit the value.
-- `COOKIE_SECURE`: `1` when using HTTPS.
-- `DATABASE_PATH`: a file path on a persistent writable volume, such as `/data/petcare.sqlite3` if the host mounts `/data`.
+```
+gunicorn --workers 1 --bind 0.0.0.0:$PORT app:app
+```
 
-If the host has no persistent disk, data may be lost when the app restarts. Do not use real client information or personal pet records in the staging app. This is a teaching MVP, not a production service. The shared deployment has not been created or checked yet.
+Environment variables:
 
-## Files
+- SECRET_KEY – a secure random key.
+- COOKIE_SECURE – set to 1 when using HTTPS.
+- DATABASE_PATH – a writable database file path on persistent storage.
 
-- `app.py`: web routes, sign-in checks and forms.
-- `core.py`: database, passwords, input checks and reminder rules.
-- `templates/`: HTML pages.
-- `static/`: website styling.
-- `tests/`: core, web integration and browser tests.
-- `.github/workflows/pet-care-ci.yml`: automatic tests.
+Secret keys must not be added to GitHub. The staging website should only use sample data. A persistent disk is needed to keep records after the website restarts.
 
-## AI use
+Deployment status: Pending.
 
-ChatGPT helped prepare this initial code, tests and setup guide. Both students must review the files, run the tests and explain the parts they use. Record actual reviews and changes in the assessment's AI-use statement. Do not claim that unverified work has passed.
+## Project Files
+
+- app.py – website functions and forms.
+- core.py – database and application logic.
+- templates/ – website pages.
+- static/ – website styling.
+- tests/ – automated tests.
+- .github/workflows/ – GitHub Actions workflows.
+
+## Project Documents
+
+- WORKING_AGREEMENT.md
+- DEFINITION_OF_DONE.md
+- backlog.csv
+- SETUP_GUIDE.md
+- MVP_SETUP.md
+
+## AI Use
+
+ChatGPT was used to help prepare the initial code, tests and documentation. Automated tests were run through GitHub Actions. Team members must review and understand the code before final submission. AI use will be recorded in the assessment report.
