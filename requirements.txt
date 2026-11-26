@@ -1,0 +1,5 @@
+Flask>=3.1,<4
+Gunicorn>=23,<24
+pytest>=8,<10
+pytest-cov>=6,<8
+playwright>=1.50,<2
