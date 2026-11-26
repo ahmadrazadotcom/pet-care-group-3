@@ -17,3 +17,6 @@ def test_later():
 
 def test_cancelled():
     assert reminder_status(date(2026, 11, 25), TODAY, True) == "cancelled"
+
+def test_seven_days():
+    assert reminder_status(date(2026, 12, 3), TODAY) == "upcoming"
